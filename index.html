@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
+    <script
+        src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
+    <script
+        src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
 </head>
 
 <body style="margin: 0; overflow: hidden;">
-    <a-scene
-        vr-mode-ui="enabled: false;"
-        loading-screen="enabled: false;"
-        renderer="logarithmicDepthBuffer: true;"
-        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
-        embedded
-        gesture-detector
-    >
+    <a-scene vr-mode-ui="enabled: false;" loading-screen="enabled: false;" renderer="logarithmicDepthBuffer: true;"
+        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;" embedded gesture-detector>
         <!-- Assets -->
         <a-assets>
             <a-asset-item id="animated-asset" src="assets/asset.glb"></a-asset-item>
         </a-assets>
+        <a-assets>
+            <video id="ar-video" src="./assets/puri.mp4" autoplay loop></video>
+        </a-assets>
 
         <!-- Invisible Plane for Simulated Plane Detection -->
-        <a-plane id="plane-detector" position="0 0 -5" rotation="-90 0 0" width="10" height="10" visible="false"></a-plane>
+        <a-plane id="plane-detector" position="0 0 -5" rotation="-90 0 0" width="10" height="10"
+            visible="false"></a-plane>
 
         <!-- Marker and 3D Model -->
         <a-marker type="pattern" preset="custom" url="assets/marker.patt" raycaster="objects: .clickable">
             <!-- Place your 3D model or objects here -->
-            <video id="ar-video" src="https://youtu.be/P_KGjifdT_g?si=6Uwt4Upb_d112y5N" autoplay loop></video>
+            <a-video src="#ar-video" width="4" height="2.25" position="0 1 0" rotation="-90 0 0" class="clickable"
+                gesture-handler>
+            </a-video>
             <!-- <a-entity id="bowser-model" scale="0.2934363863570505 0.2934363863570505 0.2934363863570505"
                 animation-mixer="loop: repeat" gltf-model="#animated-asset" class="clickable" gesture-handler>
             </a-entity> -->
@@ -37,4 +40,5 @@
         <a-entity camera></a-entity>
     </a-scene>
 </body>
+
 </html>
